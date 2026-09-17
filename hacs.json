@@ -1,0 +1,13 @@
+{
+  "name": "Hot Water Model",
+  "description": "A thermodynamic model for simulating hot water tank behavior in Home Assistant.",
+  "domain": "hot_water_model",
+  "repository": "davidlang42/ha-hot-water-model",
+  "category": "integration",
+  "support": "https://github.com/davidlang42/ha-hot-water-model",
+  "min_ha_version": "2021.9",
+  "max_ha_version": "",
+  "required": false,
+  "quality": "beta",
+  "auto_revert": true
+}
