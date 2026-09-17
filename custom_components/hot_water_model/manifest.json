@@ -1,0 +1,9 @@
+{
+  "domain": "hot_water_model",
+  "name": "Thermodynamic Hot Water Tank Model",
+  "codeowners": ["@davidlang42"],
+  "domain_owners": ["@davidlang42"],
+  "documentation": "https://github.com/davidlang42/ha-hot-water-model",
+  "iot_class": "local_calculation",
+  "version": "1.0.0"
+}
