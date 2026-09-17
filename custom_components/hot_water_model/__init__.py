@@ -15,7 +15,6 @@ DOMAIN = "hot_water_model"
 UPDATE_INTERVAL = timedelta(seconds=5)
 
 # Configuration Keys
-CONF_OUTLET_TEMP = "outlet_temp_sensor"
 CONF_INLET_TEMP = "inlet_temp_sensor"
 CONF_FLOW_RATE = "flow_rate_sensor"
 CONF_TANK_CAPACITY = "tank_capacity_litres"
@@ -27,7 +26,6 @@ CONFIG_SCHEMA = vol.Schema(
     {
         DOMAIN: vol.Schema(
             {
-                vol.Required(CONF_OUTLET_TEMP): cv.entity_id,
                 vol.Required(CONF_INLET_TEMP): cv.entity_id,
                 vol.Required(CONF_FLOW_RATE): cv.entity_id,
                 vol.Optional(CONF_TANK_CAPACITY, default=50.0): vol.Coerce(float),
@@ -44,7 +42,6 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     conf = config[DOMAIN]
 
     # Read tracking variables from configuration
-    outlet_sensor = conf[CONF_OUTLET_TEMP]
     inlet_sensor = conf[CONF_INLET_TEMP]
     flow_sensor = conf[CONF_FLOW_RATE]
     

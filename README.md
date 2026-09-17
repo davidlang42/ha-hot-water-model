@@ -19,7 +19,6 @@ To use this integration, add the following to your `configuration.yaml` file:
 
 ```yaml
 hot_water_model:
-  outlet_temp_sensor: sensor.outlet_temperature
   inlet_temp_sensor: sensor.inlet_temperature
   flow_rate_sensor: sensor.flow_rate
   tank_capacity_litres: 50.0
