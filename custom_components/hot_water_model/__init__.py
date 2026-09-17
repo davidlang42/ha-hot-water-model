@@ -20,6 +20,7 @@ CONF_FLOW_RATE = "flow_rate_sensor"
 CONF_TANK_CAPACITY = "tank_capacity_litres"
 CONF_TARGET_TEMP = "target_temperature"
 CONF_ELEMENT_KW = "heating_element_kw"
+CONF_INLET_TEMP_FALLBACK = "inlet_temp_fallback"
 
 # Schema validation with your exact existing values as defaults
 CONFIG_SCHEMA = vol.Schema(
@@ -31,6 +32,7 @@ CONFIG_SCHEMA = vol.Schema(
                 vol.Optional(CONF_TANK_CAPACITY, default=50.0): vol.Coerce(float),
                 vol.Optional(CONF_TARGET_TEMP, default=60.0): vol.Coerce(float),
                 vol.Optional(CONF_ELEMENT_KW, default=3.6): vol.Coerce(float),
+                vol.Optional(CONF_INLET_TEMP_FALLBACK, default=18.0): vol.Coerce(float),
             }
         )
     },
@@ -61,7 +63,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     runtime_data = {
         "v_hot": tank_capacity,
         "v_cold": 0.0,
-        "t_cold": 15.0, # Initial fallback, will adjust immediately to sensor state
+        "t_cold": conf[CONF_INLET_TEMP_FALLBACK], # Initial fallback, will adjust immediately to sensor state
         "last_run_time": time.time()
     }
 
@@ -83,9 +85,9 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
 
         try:
             inlet_temp_state = hass.states.get(inlet_sensor)
-            t_inlet = float(inlet_temp_state.state) if inlet_temp_state else 15.0
+            t_inlet = float(inlet_temp_state.state) if inlet_temp_state else conf[CONF_INLET_TEMP_FALLBACK]
         except (ValueError, TypeError):
-            t_inlet = 15.0
+            t_inlet = conf[CONF_INLET_TEMP_FALLBACK]
 
         v_hot = runtime_data["v_hot"]
         v_cold = runtime_data["v_cold"]
